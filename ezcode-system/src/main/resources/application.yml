@@ -1,0 +1,94 @@
+#port
+server:
+  port: 8087
+# 应用名称
+
+spring:
+  application:
+    name: server
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 5000
+      # 过期30分钟
+    expireTime: 30
+
+  #mysql -druid
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/ezcode?useSSL=false&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: 'hc57mysql'
+      # 初始连接数
+      initial-size: 5
+      # 最大连接池数量
+      max-active: 100
+      # 最小连接池数量
+      min-idle: 1
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 指定一个空闲连接最少空闲多久后可被清除，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validationQuery: SELECT 'x'
+      # 当连接空闲时，是否执行连接测试
+      test-while-idle: true
+      # 当从连接池借用连接时，是否测试该连接
+      test-on-borrow: false
+      # 在连接归还到连接池时是否测试该连接
+      test-on-return: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico
+        session-stat-enable: true
+        session-stat-max-count: 10
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: true
+        login-username: admin
+        login-password: druid5710
+        # 配置日志输出
+      filter:
+        slf4j:
+          enabled: true
+          statement-create-after-log-enabled: false
+          statement-close-after-log-enabled: false
+          result-set-open-after-log-enabled: false
+          result-set-close-after-log-enabled: false
+
+#mybatis-plus
+mybatis-plus:
+  typeAliasesPackage: com.ezcode.server.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+pwd:
+  keyValue: 'ezcode5710_zposf'

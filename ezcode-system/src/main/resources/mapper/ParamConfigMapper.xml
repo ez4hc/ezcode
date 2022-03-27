@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezcode.server.dao.ParamConfigMapper">
+
+    <resultMap id="BaseResultMap" type="com.ezcode.system.entity.ParamConfig">
+            <id property="paramId" column="param_id" jdbcType="INTEGER"/>
+            <result property="paramName" column="param_name" jdbcType="VARCHAR"/>
+            <result property="paramValue" column="param_value" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
+            <result property="state" column="state" jdbcType="INTEGER"/>
+            <result property="modifyDate" column="modify_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        param_id,param_name,param_value,type,state, date_format(modify_date, '%Y-%m-%d %H:%i:%S')
+    </sql>
+</mapper>

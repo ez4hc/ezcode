@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezcode.server.dao.UserInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ezcode.system.entity.UserInfo">
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+            <result property="userPwd" column="user_pwd" jdbcType="VARCHAR"/>
+            <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+            <result property="state" column="state" jdbcType="INTEGER"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="modifyDate" column="modify_date" jdbcType="TIMESTAMP"/>
+            <result property="loginCount" column="login_count" jdbcType="INTEGER"/>
+            <result property="lastLoginDate" column="last_login_date" jdbcType="TIMESTAMP"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,user_name,user_pwd,
+        role_id,state,create_date,
+        modify_date,login_count,last_login_date,
+        remark
+    </sql>
+</mapper>

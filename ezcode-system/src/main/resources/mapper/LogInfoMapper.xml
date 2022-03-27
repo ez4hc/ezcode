@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ezcode.server.dao.LogInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ezcode.system.entity.LogInfo">
+            <id property="logId" column="log_id" jdbcType="BIGINT"/>
+            <result property="qryUser" column="qry_user" jdbcType="BIGINT"/>
+            <result property="qryPath" column="qry_path" jdbcType="VARCHAR"/>
+            <result property="qryParam" column="qry_param" jdbcType="VARCHAR"/>
+            <result property="qryDate" column="qry_date" jdbcType="TIMESTAMP"/>
+            <result property="result" column="result" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        log_id,qry_user,qry_path,
+        qry_param,qry_date,result
+    </sql>
+</mapper>
