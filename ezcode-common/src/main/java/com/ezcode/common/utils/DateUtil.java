@@ -153,7 +153,7 @@ public class DateUtil {
      *
      * @return
      */
-    public static String getCurrentTime14() {
+    public static String getCurrentTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Date d = new Date(System.currentTimeMillis());
         return sdf.format(d);

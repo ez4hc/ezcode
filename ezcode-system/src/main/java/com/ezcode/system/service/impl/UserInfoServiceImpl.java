@@ -1,7 +1,9 @@
 package com.ezcode.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ezcode.common.utils.DateUtil;
 import com.ezcode.system.dao.UserInfoMapper;
 import com.ezcode.system.entity.UserInfo;
 import com.ezcode.system.service.UserInfoService;
@@ -21,9 +23,9 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
     private UserInfoMapper userInfoMapper;
 
     @Override
-    public boolean insertUser(UserInfo userInfo) {
+    public int insertUser(UserInfo userInfo) {
 
-        return userInfoMapper.insert(userInfo) > 0;
+        return userInfoMapper.insert(userInfo);
     }
 
     @Override
@@ -31,6 +33,16 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo>
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_name", userName);
         return userInfoMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public int updateLogInfo(UserInfo userInfo) {
+        UpdateWrapper<UserInfo> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("user_id", userInfo.getUserId())
+                .set("login_count", userInfo.getLoginCount() + 1)
+                .set("last_login_date", DateUtil.getCurrentTime());
+
+        return userInfoMapper.update(null, updateWrapper);
     }
 }
 

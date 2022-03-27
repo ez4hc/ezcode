@@ -65,6 +65,7 @@ public class LoginController {
             userInfo.setUserPwd(aesUtil.encrypt(userInfo.getUserPwd()));
             userInfo.setRoleId(101);
             userInfo.setState(1);
+            userInfo.setLoginCount(0);
 
             userInfoService.insertUser(userInfo);
         }
@@ -91,8 +92,11 @@ public class LoginController {
 
             if (aesUtil.encrypt(userInfo.getUserPwd()).equals(info.getUserPwd())) {
                 String token = UUID.randomUUID().toString().replace("-", "");
+                // 更新上次登录时间以及 登录次数
+                userInfoService.updateLogInfo(info);
 
                 redisUtil.set(token, info.getUserId() + ":" + info.getUserName(), true);
+
                 return new ResponseVo(SystemEnums.RESPONSE_SUCCESS.getCode(), "登陆成功", "user-token: " + token);
             }
         }
@@ -131,7 +135,7 @@ public class LoginController {
             msg = "密码不能为空";
         }
         if (!ValidatorUtil.isPassword(userInfo.getUserPwd())) {
-            msg = "密码输入有误，必须包含数字字母";
+            msg = "密码输入有误，需输入5-20位数字字母或其他特殊字符组合";
 
         }
         return msg;

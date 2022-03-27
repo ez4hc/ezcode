@@ -10,8 +10,10 @@ import com.ezcode.system.entity.UserInfo;
  */
 public interface UserInfoService extends IService<UserInfo> {
 
-    boolean insertUser(UserInfo userInfo);
+    int insertUser(UserInfo userInfo);
 
     UserInfo findByUserName(String userName);
+
+    int updateLogInfo(UserInfo userInfo);
 
 }
